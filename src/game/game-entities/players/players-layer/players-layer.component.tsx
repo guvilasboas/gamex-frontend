@@ -21,6 +21,8 @@ export function PlayersLayer() {
             walking={player.walking}
             direction={player.facing}
             image={sprite}
+            width={player.width}
+            height={player.height}
           />
         ))}
       </Group>

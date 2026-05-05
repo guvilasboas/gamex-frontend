@@ -5,6 +5,8 @@ export type Player = {
   id: string;
   x: number;
   y: number;
+  height: number;
+  width: number;
   walking: boolean;
   idle: boolean;
   facing: Direction;
@@ -24,5 +26,7 @@ export const playersAtom = atom<Player[]>((get) => {
       walking: entity.tags?.includes("walking") ?? false,
       idle: entity.tags?.includes("idle") ?? false,
       facing: (entity.facing as Direction) || "down",
+      height: entity.size?.y ?? 52,
+      width: entity.size?.x ?? 32,
     }));
 });

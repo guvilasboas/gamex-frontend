@@ -8,6 +8,11 @@ export type GameEntity = {
     x?: number;
     y?: number;
   };
+  size?: {
+    x?: number;
+    y?: number;
+  };
+  type?: string;
   facing?: Direction;
   sessionId?: string;
   tags?: string[];

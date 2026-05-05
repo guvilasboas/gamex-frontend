@@ -7,12 +7,22 @@ export type PlayerProps = {
   walking: boolean;
   direction: Direction;
   image: HTMLImageElement | undefined;
+  width: number;
+  height: number;
 };
 
 const toNpcDirection = (direction: Direction) =>
   direction === "up" ? "top" : direction;
 
-export function Player({ x, y, walking, direction, image }: PlayerProps) {
+export function Player({
+  x,
+  y,
+  walking,
+  direction,
+  image,
+  width,
+  height,
+}: PlayerProps) {
   const npcDir = toNpcDirection(direction);
   const animation = walking ? `walking_${npcDir}` : `idle_${npcDir}`;
 
@@ -26,8 +36,8 @@ export function Player({ x, y, walking, direction, image }: PlayerProps) {
       animation={animation}
       playing={true}
       frameRate={8}
-      width={32}
-      height={52}
+      width={width}
+      height={height}
     />
   );
 }

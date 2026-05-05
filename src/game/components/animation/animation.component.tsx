@@ -38,6 +38,14 @@ export function Animation(props: AnimationProps) {
 
   if (!sprite) return null;
 
+  // animations format: { name: [x, y, frameW, frameH, x, y, frameW, frameH, ...] }
+  const frames = animations[props.animation] as number[] | undefined;
+  const frameWidth = frames?.[2] ?? sprite.width;
+  const frameHeight = frames?.[3] ?? sprite.height;
+
+  const xScale = props.width ? props.width / frameWidth : 1;
+  const yScale = props.height ? props.height / frameHeight : 1;
+
   return (
     <Sprite
       ref={spriteRef}
@@ -49,6 +57,10 @@ export function Animation(props: AnimationProps) {
       animations={animations}
       animation={props.animation}
       frameRate={props.frameRate ?? 8}
+      scale={{
+        x: xScale,
+        y: yScale,
+      }}
     />
   );
 }
