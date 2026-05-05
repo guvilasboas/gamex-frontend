@@ -1,14 +1,22 @@
 import { useAtomValue } from "jotai/react";
 import { useWindowSize } from "react-use";
-import { playersAtom } from "../atoms";
+import { playersAtom, type Player } from "../atoms";
 import { useAuthSession } from "../auth";
 
-export function useCamera(): { x: number; y: number } {
+/**
+ * Returns the camera offset required to centre the local player on screen.
+ *
+ * Accepts an optional `players` list so callers that already hold an
+ * interpolated list can drive the camera with smooth positions instead of
+ * the raw server values.
+ */
+export function useCamera(players?: Player[]): { x: number; y: number } {
   const { session } = useAuthSession();
-  const players = useAtomValue(playersAtom);
+  const atomPlayers = useAtomValue(playersAtom);
+  const list = players ?? atomPlayers;
   const { width, height } = useWindowSize();
 
-  const currentPlayer = players.find((p) => p.id === session?.id);
+  const currentPlayer = list.find((p) => p.id === session?.id);
   if (!currentPlayer) return { x: 0, y: 0 };
 
   return {

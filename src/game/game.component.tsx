@@ -10,10 +10,12 @@ export function Game() {
   usePlayerMove();
 
   return (
-    <GameStore>
-      <Stage width={width} height={height} className={styles.Stage}>
-        <PlayersLayer />
-      </Stage>
-    </GameStore>
+    <div className={styles.Root}>
+      <GameStore>
+        <Stage width={width} height={height} className={styles.Stage}>
+          <PlayersLayer />
+        </Stage>
+      </GameStore>
+    </div>
   );
 }
