@@ -10,10 +10,12 @@ export function PlayersLayer() {
   const camera = useCamera(players);
   const sprite = useImage(SPRITE_SRC);
 
+  const sortedPlayers = [...players].sort((a, b) => a.y - b.y);
+
   return (
     <Layer>
       <Group x={camera.x} y={camera.y}>
-        {players.map((player) => (
+        {sortedPlayers.map((player) => (
           <Player
             key={player.id}
             x={player.x}
