@@ -1,0 +1,9 @@
+.Label {
+  display: grid;
+  gap: 0.55rem;
+  color: #f1e7d2;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

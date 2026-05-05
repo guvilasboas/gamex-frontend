@@ -1,0 +1,35 @@
+.SocketConnectionBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.SocketConnectionText {
+  font-family: var(--font-primary);
+}
+
+.SocketConnectionIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.SocketConnectionIndicator[data-status="connected"] {
+  background-color: #22c55e;
+}
+
+.SocketConnectionIndicator[data-status="disconnected"] {
+  background-color: #ef4444;
+}
+
+.SocketConnectionIndicator[data-status="connecting"] {
+  background-color: #fbbf24;
+}

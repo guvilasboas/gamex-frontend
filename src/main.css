@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --font-primary: "Manrope", sans-serif;
+  --font-display: "Cinzel", serif;
+  --font-pixel: "Press Start 2P", monospace;
+  color: #f8f2e7;
+  background:
+    radial-gradient(circle at top, rgba(200, 162, 90, 0.12), transparent 30%),
+    linear-gradient(180deg, #090d16 0%, #0f1724 45%, #070b12 100%);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  overflow: hidden;
+  min-height: 100vh;
+  color: inherit;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(208, 163, 83, 0.18),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(72, 110, 168, 0.22),
+      transparent 26%
+    ),
+    linear-gradient(180deg, #090d16 0%, #111827 45%, #070b12 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none;
+}

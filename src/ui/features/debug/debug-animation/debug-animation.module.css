@@ -1,0 +1,417 @@
+.Container {
+  display: grid;
+  grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+  min-height: 100%;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(34, 197, 94, 0.12),
+      transparent 28%
+    ),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-right: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.Section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.SectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0f766e;
+}
+
+.FieldLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.FieldValue {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: #0f172a;
+}
+
+.Select,
+.Range,
+.ControlButton,
+.SegmentedButton {
+  appearance: none;
+  font: inherit;
+}
+
+.Select {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 12px;
+  background: #fff;
+  color: #0f172a;
+  padding: 10px 12px;
+}
+
+.SegmentedControl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.SegmentedButton {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 12px;
+  background: #fff;
+  color: #334155;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.SegmentedButton[data-active="true"] {
+  border-color: transparent;
+  background: linear-gradient(135deg, #14b8a6, #22c55e);
+  color: #03201a;
+  transform: translateY(-1px);
+}
+
+.ControlsRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ControlButton {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.ControlButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.CopyButton {
+  border: 1px solid rgba(20, 184, 166, 0.22);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #14b8a6, #22c55e);
+  color: #03201a;
+  padding: 10px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.CopyButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ResetButton {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 10px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.CopyHint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.RangeField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.RangeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.Range {
+  width: 100%;
+  accent-color: #14b8a6;
+}
+
+.NumericFields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ControlGroups {
+  display: grid;
+  gap: 12px;
+}
+
+.ControlFieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.9), #ffffff);
+}
+
+.ControlLegend {
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0f766e;
+}
+
+.ActionRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.NumberField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.NumberInput {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 12px;
+  background: #fff;
+  color: #0f172a;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.Metadata {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.MetadataLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.7);
+}
+
+.MetadataValue {
+  display: block;
+  font-size: 13px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.StagePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+}
+
+.StageHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.StageEyebrow {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0f766e;
+}
+
+.StageTitle {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.StageDescription {
+  max-width: 320px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.CanvasShell {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(8, 17, 29, 0.95)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size:
+    auto,
+    20px 20px,
+    20px 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.CanvasShell[data-pan="true"] {
+  cursor: grab;
+}
+
+.CanvasShell[data-pan="true"]:active {
+  cursor: grabbing;
+}
+
+.ZoomRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ZoomButton {
+  appearance: none;
+  font: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #334155;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.ZoomButton:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.ZoomButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ZoomButton[data-active="true"] {
+  background: linear-gradient(135deg, #14b8a6, #22c55e);
+  border-color: transparent;
+  color: #03201a;
+}
+
+.ZoomDivider {
+  width: 1px;
+  height: 18px;
+  background: rgba(148, 163, 184, 0.35);
+  margin: 0 2px;
+}
+
+.ZoomLabel {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #475569;
+  min-width: 38px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ZoomLabel:hover {
+  color: #0f766e;
+}
+
+.LoadingState,
+.EmptyState {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 320px;
+  padding: 24px;
+  color: #64748b;
+}
+
+@media (max-width: 960px) {
+  .Container {
+    grid-template-columns: 1fr;
+  }
+
+  .Sidebar {
+    border-right: 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .StageHeader {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .Sidebar,
+  .StagePanel {
+    padding: 16px;
+  }
+
+  .ControlsRow,
+  .SegmentedControl,
+  .NumericFields {
+    grid-template-columns: 1fr;
+  }
+
+  .StageTitle {
+    font-size: 22px;
+  }
+}

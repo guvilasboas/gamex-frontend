@@ -1,0 +1,15 @@
+import { createContext } from "react";
+import type { Socket } from "socket.io-client";
+
+export enum SocketStatus {
+  CONNECTING = "connecting",
+  CONNECTED = "connected",
+  DISCONNECTED = "disconnected",
+}
+
+export interface SocketContextValue {
+  socket: Socket;
+  status: SocketStatus;
+}
+
+export const SocketContext = createContext<SocketContextValue | null>(null);
