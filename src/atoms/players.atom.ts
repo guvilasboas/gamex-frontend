@@ -17,8 +17,8 @@ export type Direction = "down" | "left" | "right" | "up";
 export const playersAtom = atom<Player[]>((get) => {
   const entities = get(gameStateAtom)?.entities ?? {};
 
-  return Object.values(entities)
-    .filter((entity) => entity?.type === "player")
+  const players = Object.values(entities)
+    .filter((entity) => entity?.tags?.includes("player"))
     .map((entity) => ({
       id: entity.id ?? "",
       x: entity.position?.x ?? 0,
@@ -29,4 +29,6 @@ export const playersAtom = atom<Player[]>((get) => {
       height: entity.size?.y ?? 52,
       width: entity.size?.x ?? 32,
     }));
+
+  return players;
 });
