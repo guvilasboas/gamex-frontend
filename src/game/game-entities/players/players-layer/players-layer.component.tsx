@@ -14,20 +14,18 @@ export function PlayersLayer() {
 
   return (
     <Layer>
-      <Group x={camera.x} y={camera.y}>
-        {sortedPlayers.map((player) => (
-          <Player
-            key={player.id}
-            x={player.x}
-            y={player.y}
-            walking={player.walking}
-            direction={player.facing}
-            image={sprite}
-            width={player.width}
-            height={player.height}
-          />
-        ))}
-      </Group>
+      {sortedPlayers.map((player) => (
+        <Player
+          key={player.id}
+          x={player.x}
+          y={player.y}
+          walking={player.walking}
+          direction={player.facing}
+          image={sprite}
+          width={player.width}
+          height={player.height}
+        />
+      ))}
     </Layer>
   );
 }

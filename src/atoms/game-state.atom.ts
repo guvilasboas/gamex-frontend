@@ -21,8 +21,10 @@ export type GameEntity = {
 
 export type GameState = {
   entities: Record<string, GameEntity>;
+  components: Record<string, unknown>;
 };
 
 export const gameStateAtom = atomWithImmer<GameState>({
   entities: {},
+  components: {},
 });

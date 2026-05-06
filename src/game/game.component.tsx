@@ -2,8 +2,9 @@ import { Stage } from "react-konva";
 import { useWindowSize } from "react-use";
 import styles from "./game.module.css";
 import { GameStore } from "./game-store";
-import { PlayersLayer } from "./game-entities/players";
 import { usePlayerMove } from "./use-player-move";
+import { GameEntities } from "./game-entities";
+import { PlayersLayer } from "./game-entities/players";
 
 export function Game() {
   const { width, height } = useWindowSize();
@@ -14,6 +15,7 @@ export function Game() {
       <GameStore>
         <Stage width={width} height={height} className={styles.Stage}>
           <PlayersLayer />
+          <GameEntities />
         </Stage>
       </GameStore>
     </div>
