@@ -1,4 +1,5 @@
 import { atomWithImmer } from "jotai-immer";
+import { EngineComponent } from "../engine";
 
 export type Direction = "down" | "left" | "right" | "up";
 
@@ -21,7 +22,7 @@ export type GameEntity = {
 
 export type GameState = {
   entities: Record<string, GameEntity>;
-  components: Record<string, unknown>;
+  components: Record<string, EngineComponent>;
 };
 
 export const gameStateAtom = atomWithImmer<GameState>({

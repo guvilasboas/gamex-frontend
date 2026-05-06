@@ -19,6 +19,12 @@ export interface EngineComponent {
   };
 }
 
+/**
+ * Type guard to check if an object is an EngineComponent.
+ *
+ * @param x The object to check.
+ * @returns True if the object is an EngineComponent, false otherwise.
+ */
 export function isEngineComponent(x: unknown): x is EngineComponent {
   return (
     typeof x === "object" &&
@@ -57,4 +63,14 @@ export function isEngineComponent(x: unknown): x is EngineComponent {
     "z" in (x as any).position &&
     typeof (x as any).position.z === "number"
   );
+}
+
+/**
+ * Type guard to check if an object is an array of EngineComponents.
+ *
+ * @param x The object to check.
+ * @returns True if the object is an array of EngineComponents, false otherwise.
+ */
+export function isEngineComponentArray(x: unknown): x is EngineComponent[] {
+  return Array.isArray(x) && x.every((item) => isEngineComponent(item));
 }

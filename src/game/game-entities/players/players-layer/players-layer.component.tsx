@@ -1,13 +1,11 @@
-import { Layer, Group } from "react-konva";
+import { Layer } from "react-konva";
 import { Player } from "../player";
-import { useCamera } from "../../../use-camera";
 import { SPRITE_SRC } from "../../../sprite-config";
 import { useImage } from "../../../../hooks/use-image";
 import { useInterpolatedPlayers } from "../../../hooks/use-interpolated-players";
 
 export function PlayersLayer() {
   const players = useInterpolatedPlayers();
-  const camera = useCamera(players);
   const sprite = useImage(SPRITE_SRC);
 
   const sortedPlayers = [...players].sort((a, b) => a.y - b.y);

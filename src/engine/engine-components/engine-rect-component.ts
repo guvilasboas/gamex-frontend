@@ -7,6 +7,12 @@ export interface EngineRectComponent extends EngineComponent {
   fillColor?: string;
 }
 
+/**
+ * Type guard to check if an object is an EngineRectComponent.
+ *
+ * @param x The object to check.
+ * @returns True if the object is an EngineRectComponent, false otherwise.
+ */
 export function isEngineRectComponent(x: unknown): x is EngineRectComponent {
   if (!isEngineComponent(x)) {
     return false;
