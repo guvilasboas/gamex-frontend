@@ -52,8 +52,9 @@ export function useEngineInterpolation(
     const renders = renderPosRef.current;
 
     for (const player of entities) {
-      const existing = map.get(player.id);
-      const curRender = renders.get(player.id);
+      const key = `${player.entityId}_${player.id}`;
+      const existing = map.get(key);
+      const curRender = renders.get(key);
 
       const { position } = player;
 
@@ -67,7 +68,7 @@ export function useEngineInterpolation(
         existing.targetX !== position.x ||
         existing.targetY !== position.y
       ) {
-        map.set(player.id, {
+        map.set(key, {
           prevX,
           prevY,
           targetX: position.x,
@@ -79,7 +80,7 @@ export function useEngineInterpolation(
 
     // Remove entries for players that have disconnected
     for (const id of map.keys()) {
-      if (!entities.some((p) => p.id === id)) {
+      if (!entities.some((p) => `${p.entityId}_${p.id}` === id)) {
         map.delete(id);
         renders.delete(id);
       }
@@ -113,7 +114,7 @@ export function useEngineInterpolation(
 
   // ── Merge interpolated positions back into the player list ───────────────
   const unsortedEntities = entities.map((player) => {
-    const pos = renderPositions.get(player.id);
+    const pos = renderPositions.get(`${player.entityId}_${player.id}`);
     return {
       ...player,
       position: {

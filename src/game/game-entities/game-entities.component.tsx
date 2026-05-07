@@ -18,7 +18,10 @@ export function GameEntities() {
     <Layer>
       <Group x={camera.x} y={camera.y}>
         {interpolatedComponents.map((component) => (
-          <GameEntity key={component.id} component={component} />
+          <GameEntity
+            key={`${component.entityId}_${component.id}`}
+            component={component}
+          />
         ))}
       </Group>
     </Layer>
