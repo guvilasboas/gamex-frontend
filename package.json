@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "check-types": "tsc --noEmit",
-    "codegen": "openapi-rq -i http://localhost:3000/api-json --output src/api/"
+    "codegen": "openapi-rq -i http://localhost:3000/api-json --output src/api/",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.8",

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useSocketEmit } from "../socket";
 
-const MOVE_INTERVAL_MS = 1000 / 20; // ~20 fps
+const SNAPSHOT_INTERVAL_MS = 1000 / 20; // match server tick rate
 
 type KeyState = {
   up: boolean;
@@ -19,20 +19,32 @@ export function usePlayerMove(): void {
     right: false,
   });
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const sequenceRef = useRef(0);
 
   useEffect(() => {
+    const nextSeq = () => ++sequenceRef.current;
+
     const anyPressed = () => {
       const { up, down, left, right } = keys.current;
       return up || down || left || right;
     };
 
+    const sendSnapshot = () => {
+      emit("session:action", {
+        type: "input.snapshot",
+        sequence: nextSeq(),
+        inputs: {
+          "move.up": keys.current.up,
+          "move.down": keys.current.down,
+          "move.left": keys.current.left,
+          "move.right": keys.current.right,
+        },
+      });
+    };
+
     const startLoop = () => {
       if (intervalRef.current !== null) return;
-      intervalRef.current = setInterval(() => {
-        if (anyPressed()) {
-          emit("session:action", { type: "move", ...keys.current });
-        }
-      }, MOVE_INTERVAL_MS);
+      intervalRef.current = setInterval(sendSnapshot, SNAPSHOT_INTERVAL_MS);
     };
 
     const stopLoop = () => {
@@ -43,54 +55,78 @@ export function usePlayerMove(): void {
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore repeat events (key held)
+      if (e.repeat) return;
+
       let changed = false;
-      if (e.key === "ArrowUp" || e.key.toLocaleLowerCase() === "w") {
+      if (e.key === "ArrowUp" || e.key.toLowerCase() === "w") {
         keys.current.up = true;
         changed = true;
       }
-      if (e.key === "ArrowDown" || e.key.toLocaleLowerCase() === "s") {
+      if (e.key === "ArrowDown" || e.key.toLowerCase() === "s") {
         keys.current.down = true;
         changed = true;
       }
-      if (e.key === "ArrowLeft" || e.key.toLocaleLowerCase() === "a") {
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") {
         keys.current.left = true;
         changed = true;
       }
-      if (e.key === "ArrowRight" || e.key.toLocaleLowerCase() === "d") {
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") {
         keys.current.right = true;
         changed = true;
       }
-      if (changed) startLoop();
+
+      if (changed) {
+        // Send immediately so the server sees the change before the next
+        // interval tick (avoids up-to-50ms direction lag)
+        sendSnapshot();
+        startLoop();
+      }
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.key === "ArrowUp" || e.key.toLocaleLowerCase() === "w")
+      let changed = false;
+      if (e.key === "ArrowUp" || e.key.toLowerCase() === "w") {
         keys.current.up = false;
-      if (e.key === "ArrowDown" || e.key.toLocaleLowerCase() === "s")
-        keys.current.down = false;
-      if (e.key === "ArrowLeft" || e.key.toLocaleLowerCase() === "a")
-        keys.current.left = false;
-      if (e.key === "ArrowRight" || e.key.toLocaleLowerCase() === "d")
-        keys.current.right = false;
-
-      if (!anyPressed()) {
-        emit("session:action", {
-          type: "move",
-          up: false,
-          down: false,
-          left: false,
-          right: false,
-        });
-        stopLoop();
+        changed = true;
       }
+      if (e.key === "ArrowDown" || e.key.toLowerCase() === "s") {
+        keys.current.down = false;
+        changed = true;
+      }
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") {
+        keys.current.left = false;
+        changed = true;
+      }
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") {
+        keys.current.right = false;
+        changed = true;
+      }
+
+      if (changed) {
+        sendSnapshot();
+        if (!anyPressed()) {
+          stopLoop();
+        }
+      }
+    };
+
+    // When the window loses focus, release all keys so the player
+    // doesn't keep moving while the tab is in the background.
+    const handleBlur = () => {
+      keys.current = { up: false, down: false, left: false, right: false };
+      sendSnapshot();
+      stopLoop();
     };
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("blur", handleBlur);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("blur", handleBlur);
       stopLoop();
     };
   }, [emit]);
