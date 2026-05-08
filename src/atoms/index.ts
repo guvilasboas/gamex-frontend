@@ -1,2 +1,1 @@
-export * from "./entities.atom";
-export * from "./players.atom";
+export * from "./game-state.atom";

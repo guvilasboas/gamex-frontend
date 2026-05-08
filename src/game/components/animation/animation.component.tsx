@@ -34,7 +34,7 @@ export function Animation(props: AnimationProps) {
       s.stop();
     }
     s.getLayer()?.batchDraw();
-  }, [props.animation, props.playing]);
+  }, [sprite, props.animation, props.playing]);
 
   if (!sprite) return null;
 

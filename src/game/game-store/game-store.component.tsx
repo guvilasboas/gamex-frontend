@@ -29,8 +29,6 @@ export function GameStore({ children }: GameStoreProps) {
           set(state, p.key, p.value);
         }
       });
-
-      return state;
     });
   });
 
