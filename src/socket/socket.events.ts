@@ -14,7 +14,7 @@ export type SessionPatchPayload = {
 };
 export interface ServerToClientEvents {
   ["session:init"]: (payload: SessionInitPayload) => void;
-  ["session:patch"]: (patch: SessionPatchPayload) => void;
+  ["session:patch"]: (patch: SessionPatchPayload[]) => void;
   [event: string]: (...args: any[]) => any;
 }
 export interface ClientToServerEvents {

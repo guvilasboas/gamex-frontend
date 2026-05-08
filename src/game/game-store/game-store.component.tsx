@@ -18,15 +18,17 @@ export function GameStore({ children }: GameStoreProps) {
     setGameState(props);
   });
 
-  useSocketOn("session:patch", (patch: SessionPatchPayload) => {
+  useSocketOn("session:patch", (patch: SessionPatchPayload[]) => {
     setGameState((state) => {
-      if (patch.type === "delete") {
-        unset(state, patch.key);
-      }
+      patch.forEach((p) => {
+        if (p.type === "delete") {
+          unset(state, p.key);
+        }
 
-      if (patch.type == "set") {
-        set(state, patch.key, patch.value);
-      }
+        if (p.type === "set") {
+          set(state, p.key, p.value);
+        }
+      });
 
       return state;
     });
