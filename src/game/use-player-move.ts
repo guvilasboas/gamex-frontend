@@ -30,7 +30,7 @@ export function usePlayerMove(): void {
     };
 
     const sendSnapshot = () => {
-      emit("session:action", {
+      const payload = {
         type: "input.snapshot",
         sequence: nextSeq(),
         inputs: {
@@ -39,7 +39,11 @@ export function usePlayerMove(): void {
           "move.left": keys.current.left,
           "move.right": keys.current.right,
         },
-      });
+      };
+
+      emit("session:action", payload);
+
+      console.log("[DEV] payload: ", payload);
     };
 
     const startLoop = () => {

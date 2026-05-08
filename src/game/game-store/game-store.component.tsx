@@ -15,10 +15,14 @@ export function GameStore({ children }: GameStoreProps) {
   const setGameState = useSetAtom(gameStateAtom);
 
   useSocketOn("session:init", (props: SessionInitPayload) => {
+    console.log("[DEV] received initial state: ", props);
+
     setGameState(props);
   });
 
   useSocketOn("session:patch", (patch: SessionPatchPayload[]) => {
+    console.log("[DEV] received patch: ", patch);
+
     setGameState((state) => {
       patch.forEach((p) => {
         if (p.type === "delete") {
