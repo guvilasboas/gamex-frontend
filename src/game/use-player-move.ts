@@ -9,6 +9,7 @@ type KeyState = {
   left: boolean;
   right: boolean;
   shift: boolean;
+  space: boolean;
 };
 
 export function usePlayerMove(): void {
@@ -19,6 +20,7 @@ export function usePlayerMove(): void {
     left: false,
     right: false,
     shift: false,
+    space: false,
   });
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const sequenceRef = useRef(0);
@@ -41,6 +43,7 @@ export function usePlayerMove(): void {
           "move.left": keys.current.left,
           "move.right": keys.current.right,
           "move.shift": keys.current.shift,
+          "move.space": keys.current.space,
         },
       };
 
@@ -82,6 +85,10 @@ export function usePlayerMove(): void {
       }
       if (e.key === "Shift") {
         keys.current.shift = true;
+        changed = true;
+      }
+      if (e.key === " ") {
+        keys.current.space = true;
         changed = true;
       }
 
@@ -133,6 +140,7 @@ export function usePlayerMove(): void {
         left: false,
         right: false,
         shift: false,
+        space: false,
       };
       sendSnapshot();
       stopLoop();
