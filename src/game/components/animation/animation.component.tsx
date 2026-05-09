@@ -8,8 +8,8 @@ import { useImage } from "../../../hooks/use-image";
 export type AnimationProps = {
   resource: string;
   frameRate?: number;
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
   animation: string;
   playing?: boolean;
   height?: number;

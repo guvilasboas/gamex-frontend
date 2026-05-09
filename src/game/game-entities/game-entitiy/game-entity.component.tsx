@@ -12,16 +12,23 @@ export function GameEntity({ component }: GameEntityProps) {
     const { resource, animation, playing, frameRate, position, size } =
       component;
     return (
-      <Animation
-        resource={resource}
-        animation={animation}
-        playing={playing}
-        frameRate={frameRate}
-        x={position?.x}
-        y={position?.y}
-        height={size.y}
-        width={size.x}
-      />
+      <Group x={position.x} y={position.y}>
+        <Animation
+          resource={resource}
+          animation={animation}
+          playing={playing}
+          frameRate={frameRate}
+          height={size.y}
+          width={size.x}
+        />
+        <Text
+          text={`${position.x}:${position.y}`}
+          fontSize={14}
+          fill="#00b115"
+          align="center"
+          y={-16}
+        />
+      </Group>
     );
   }
 

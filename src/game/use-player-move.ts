@@ -8,6 +8,7 @@ type KeyState = {
   down: boolean;
   left: boolean;
   right: boolean;
+  shift: boolean;
 };
 
 export function usePlayerMove(): void {
@@ -17,6 +18,7 @@ export function usePlayerMove(): void {
     down: false,
     left: false,
     right: false,
+    shift: false,
   });
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const sequenceRef = useRef(0);
@@ -38,12 +40,11 @@ export function usePlayerMove(): void {
           "move.down": keys.current.down,
           "move.left": keys.current.left,
           "move.right": keys.current.right,
+          "move.shift": keys.current.shift,
         },
       };
 
       emit("session:action", payload);
-
-      console.log("[DEV] payload: ", payload);
     };
 
     const startLoop = () => {
@@ -79,6 +80,10 @@ export function usePlayerMove(): void {
         keys.current.right = true;
         changed = true;
       }
+      if (e.key === "Shift") {
+        keys.current.shift = true;
+        changed = true;
+      }
 
       if (changed) {
         // Send immediately so the server sees the change before the next
@@ -106,6 +111,10 @@ export function usePlayerMove(): void {
         keys.current.right = false;
         changed = true;
       }
+      if (e.key === "Shift") {
+        keys.current.shift = false;
+        changed = true;
+      }
 
       if (changed) {
         sendSnapshot();
@@ -118,7 +127,13 @@ export function usePlayerMove(): void {
     // When the window loses focus, release all keys so the player
     // doesn't keep moving while the tab is in the background.
     const handleBlur = () => {
-      keys.current = { up: false, down: false, left: false, right: false };
+      keys.current = {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        shift: false,
+      };
       sendSnapshot();
       stopLoop();
     };
