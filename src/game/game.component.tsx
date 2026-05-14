@@ -4,6 +4,7 @@ import styles from "./game.module.css";
 import { GameStore } from "./game-store";
 import { usePlayerMove } from "./use-player-move";
 import { GameEntities } from "./game-entities";
+import { GameHud } from "./game-hud";
 
 export function Game() {
   const { width, height } = useWindowSize();
@@ -16,6 +17,7 @@ export function Game() {
           <GameEntities />
         </Stage>
       </GameStore>
+      <GameHud />
     </div>
   );
 }

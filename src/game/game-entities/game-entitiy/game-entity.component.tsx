@@ -22,7 +22,7 @@ export function GameEntity({ component }: GameEntityProps) {
           width={size.x}
         />
         <Text
-          text={`${position.x}:${position.y}`}
+          text={`${Number(position.x).toFixed(2)}x${Number(position.y).toFixed(2)}`}
           fontSize={14}
           fill="#00b115"
           align="center"

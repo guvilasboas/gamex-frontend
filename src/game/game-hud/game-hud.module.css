@@ -1,0 +1,76 @@
+.Root {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.HealthPanel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(9, 13, 22, 0.88),
+    rgba(15, 23, 42, 0.82)
+  );
+  border: 1px solid rgba(208, 163, 83, 0.35);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(208, 163, 83, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.HealthLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.HeartIcon {
+  color: #ef4444;
+  font-size: 13px;
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.7));
+}
+
+.HealthText {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #d0a353;
+  text-transform: uppercase;
+}
+
+.BarTrack {
+  width: 120px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.BarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #b91c1c, #ef4444 60%, #fca5a5);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+.HealthValue {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8f2e7;
+  min-width: 24px;
+}
+
+.HealthMax {
+  font-size: 10px;
+  color: rgba(248, 242, 231, 0.45);
+}
